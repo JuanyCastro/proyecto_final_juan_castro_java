@@ -1,0 +1,19 @@
+body {
+    background-color: #f8f9fa;
+}
+.tabla-img {
+    width: 80px;
+    text-align: center;
+}
+.tabla-img img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+.no-img {
+    width: 60px;
+    height: 60px;
+    background-color: transparent;
+    display: inline-block;
+}
