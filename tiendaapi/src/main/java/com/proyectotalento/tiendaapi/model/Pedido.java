@@ -13,10 +13,9 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private LocalDateTime fecha;
-
     private Double total;
+    private Boolean activo = true;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -29,6 +28,7 @@ public class Pedido {
         this.fecha = fecha;
         this.total = total;
         this.lineas = lineas;
+        this.activo = true;
     }
 
     public Long getId() { return id; }
@@ -42,4 +42,8 @@ public class Pedido {
 
     public List<LineaPedido> getLineas() { return lineas; }
     public void setLineas(List<LineaPedido> lineas) { this.lineas = lineas; }
+
+    public Boolean getActivo() { return activo; }
+    public void setActivo(Boolean activo) { this.activo = activo; }
 }
+
