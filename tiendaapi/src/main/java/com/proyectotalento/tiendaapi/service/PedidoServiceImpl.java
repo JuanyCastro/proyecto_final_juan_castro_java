@@ -27,7 +27,7 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Override
     public List<Pedido> listarPedidos() {
-        return pedidoRepository.findAll();
+        return pedidoRepository.findByActivoTrue();
     }
 
     @Override
@@ -37,7 +37,6 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Override
     public Pedido crearPedido(Pedido pedido) {
-
         pedido.setFecha(LocalDateTime.now());
 
         double total = 0.0;
@@ -58,12 +57,17 @@ public class PedidoServiceImpl implements PedidoService {
         }
 
         pedido.setTotal(total);
+        pedido.setActivo(true);
 
         return pedidoRepository.save(pedido);
     }
 
     @Override
     public void eliminarPedido(Long id) {
-        pedidoRepository.deleteById(id);
+        Pedido pedido = pedidoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pedido no encontrado"));
+
+        pedido.setActivo(false);
+        pedidoRepository.save(pedido);
     }
 }
