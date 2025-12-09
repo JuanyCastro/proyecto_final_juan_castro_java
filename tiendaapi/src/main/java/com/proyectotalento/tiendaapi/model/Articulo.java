@@ -14,6 +14,7 @@ public class Articulo {
     private String descripcion;
     private Double precio;
     private String imagenUrl;
+    private Boolean activo = true;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
@@ -28,6 +29,7 @@ public class Articulo {
         this.precio = precio;
         this.imagenUrl = imagenUrl;
         this.categoria = categoria;
+        this.activo = true;
     }
 
     public Long getId() { return id; }
@@ -47,4 +49,8 @@ public class Articulo {
 
     public Categoria getCategoria() { return categoria; }
     public void setCategoria(Categoria categoria) { this.categoria = categoria; }
+
+    public Boolean getActivo() { return activo; }
+    public void setActivo(Boolean activo) { this.activo = activo; }
 }
+
