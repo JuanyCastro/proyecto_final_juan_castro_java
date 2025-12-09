@@ -20,7 +20,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     @Override
     public List<Categoria> listarCategorias() {
-        return categoriaRepository.findAll();
+        return categoriaRepository.findByActivoTrue();
     }
 
     @Override
@@ -30,17 +30,26 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     @Override
     public Categoria guardarCategoria(Categoria categoria) {
+        categoria.setActivo(true);
         return categoriaRepository.save(categoria);
     }
 
     @Override
     public Categoria actualizarCategoria(Long id, Categoria categoria) {
-        categoria.setId(id);
-        return categoriaRepository.save(categoria);
+        Categoria existente = categoriaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
+
+        existente.setNombre(categoria.getNombre());
+
+        return categoriaRepository.save(existente);
     }
 
     @Override
     public void eliminarCategoria(Long id) {
-        categoriaRepository.deleteById(id);
+        Categoria categoria = categoriaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
+
+        categoria.setActivo(false);
+        categoriaRepository.save(categoria);
     }
 }
