@@ -9,14 +9,15 @@ public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String nombre;
+    private Boolean activo = true;
 
     public Categoria() {}
 
     public Categoria(Long id, String nombre) {
         this.id = id;
         this.nombre = nombre;
+        this.activo = true;
     }
 
     public Long getId() { return id; }
@@ -24,4 +25,7 @@ public class Categoria {
 
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
+
+    public Boolean getActivo() { return activo; }
+    public void setActivo(Boolean activo) { this.activo = activo; }
 }
